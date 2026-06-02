@@ -1,0 +1,28 @@
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #030303, #101010);
+  padding: 2rem;
+  border-bottom: 1px solid #262626;
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.65);
+}
+
+.osi-img {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 4rem;
+  border: 2px solid #2f2f2f;
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.06);
+}
+
+.title {
+  color: #f2f2f2;
+  font-size: 3rem;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.08);
+}
+
+.user {
+  color: #cfcfcf;
+  font-size: 1rem;
+}
