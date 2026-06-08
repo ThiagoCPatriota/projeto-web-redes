@@ -2,7 +2,7 @@ import * as application from './application.js'
 import * as presentation from './presentation.js'
 
 function processPacket(packet) {
-  presentation.renderPresentationLayer(packet)
+  presentation.renderizarCamadaApresentacao(packet)
   const savedKey = application.loadLastPacketKey()
   if (savedKey) {
     console.log('Packet key saved in localStorage:', savedKey)
@@ -12,17 +12,17 @@ function processPacket(packet) {
 function handleRequest(event) {
   event.preventDefault()
 
-  const requestText = presentation.getRequestText()
-  const file = presentation.getSelectedFile()
+  const requestText = presentation.obterTextoRequisicao()
+  const file = presentation.obterArquivoSelecionado()
   const protocolType = application.detectProtocol(requestText, !!file)
 
   if (!protocolType) {
-    presentation.showAlert('Por favor, digite algo ou selecione um arquivo.')
+    presentation.mostrarAlerta('Por favor, digite algo ou selecione um arquivo.')
     return
   }
 
-  presentation.clearPresentationLayer()
-  presentation.renderProtocolName(application.getProtocolLabel(protocolType))
+  presentation.limparCamadaApresentacao()
+  presentation.renderizarNomeProtocolo(application.getProtocolLabel(protocolType))
 
   if (protocolType === 'email') {
     presentation.renderEmailForm(requestText, application.USER_NAME, formData => {
@@ -57,5 +57,5 @@ function handleRequest(event) {
   }
 }
 
-presentation.initializeUI(application.USER_NAME)
-presentation.onRequestClick(handleRequest)
+presentation.inicializarUI(application.USER_NAME)
+presentation.aoCliqueRequisicao(handleRequest)

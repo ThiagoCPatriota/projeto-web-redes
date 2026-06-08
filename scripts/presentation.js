@@ -8,36 +8,36 @@ const presentationContainer = document.querySelector('.presentation-container')
 const applicationSection = document.querySelector('.application-layer-section')
 const presentationSection = document.querySelector('.presentation-layer-section')
 
-export function initializeUI(userName) {
+export function inicializarUI(userName) {
   if (user) user.textContent = `Usuário: ${userName}`
 }
 
-export function getRequestText() {
+export function obterTextoRequisicao() {
   return reqText ? reqText.value.trim() : ''
 }
 
-export function getSelectedFile() {
+export function obterArquivoSelecionado() {
   return inputFile && inputFile.files.length > 0 ? inputFile.files[0] : null
 }
 
-export function renderProtocolName(text) {
+export function renderizarNomeProtocolo(text) {
   if (protocolName) protocolName.textContent = text
 }
 
-export function clearUI() {
+export function limparUI() {
   if (formContainer) formContainer.innerHTML = ''
   if (applicationSection) applicationSection.classList.add('hidden')
   if (reqText) reqText.value = ''
   if (inputFile) inputFile.value = ''
-  renderProtocolName('')
-  clearPresentationLayer()
+  renderizarNomeProtocolo('')
+  limparCamadaApresentacao()
 }
 
 function showApplicationLayer() {
   if (applicationSection) applicationSection.classList.remove('hidden')
 }
 
-export function showAlert(message) {
+export function mostrarAlerta(message) {
   window.alert(message)
 }
 
@@ -189,7 +189,7 @@ export function renderFileForm(file, usuario, onSubmit) {
   })
 }
 
-export function onRequestClick(handler) {
+export function aoCliqueRequisicao(handler) {
   if (reqBtn) reqBtn.addEventListener('click', handler)
 }
 
@@ -216,27 +216,45 @@ const TYPE_LABELS = {
   arquivo: { number: 4, label: 'ARQUIVOS', varName: 'arquivo' }
 }
 
-function encodeBase64(value) {
-  if (!value) return ''
-  return btoa(unescape(encodeURIComponent(String(value))))
+function cifraCesar(valor, deslocamento = 3) {
+  if (!valor) return ''
+  const texto = String(valor)
+  const desloc = ((deslocamento % 26) + 26) % 26
+  let resultado = ''
+  for (let i = 0; i < texto.length; i++) {
+    const c = texto.charCodeAt(i)
+    // A-Z
+    if (c >= 65 && c <= 90) {
+      resultado += String.fromCharCode(((c - 65 + desloc) % 26) + 65)
+      continue
+    }
+    // a-z
+    if (c >= 97 && c <= 122) {
+      resultado += String.fromCharCode(((c - 97 + desloc) % 26) + 97)
+      continue
+    }
+    // keep other chars unchanged
+    resultado += String.fromCharCode(c)
+  }
+  return resultado
 }
 
-function escapeHtml(text) {
+function escaparHtml(text) {
   const div = document.createElement('div')
   div.textContent = text
   return div.innerHTML
 }
 
-function buildCodeLine(prop, value, isSensitive, isLast) {
+function montarLinhaCodigo(prop, value, isSensitive, isLast) {
   const comma = isLast ? '' : '<span class="syn-comma">,</span>'
-  const displayValue = escapeHtml(isSensitive ? encodeBase64(value) : String(value))
+  const displayValue = escaparHtml(isSensitive ? cifraCesar(value) : String(value))
   const stringClass = isSensitive ? 'syn-string-encrypted' : 'syn-string'
-  const badge = isSensitive ? ' <span class="encryption-badge">🔒 Base64</span>' : ''
+  const badge = isSensitive ? ' <span class="encryption-badge">🔒 Cifra de César</span>' : ''
 
-  return `  <span class="syn-prop">${escapeHtml(prop)}</span>: <span class="${stringClass}">'${displayValue}'</span>${badge}${comma}`
+  return `  <span class="syn-prop">${escaparHtml(prop)}</span>: <span class="${stringClass}">'${displayValue}'</span>${badge}${comma}`
 }
 
-export function renderPresentationLayer(packet) {
+export function renderizarCamadaApresentacao(packet) {
   if (!presentationContainer) return
 
   const tipo = packet.tipo
@@ -249,10 +267,10 @@ export function renderPresentationLayer(packet) {
   const lines = fieldsToShow.map((prop, i) => {
     const isSensitive = sensitiveList.includes(prop)
     const isLast = i === fieldsToShow.length - 1
-    return buildCodeLine(prop, packet[prop], isSensitive, isLast)
+    return montarLinhaCodigo(prop, packet[prop], isSensitive, isLast)
   })
 
-  const codeHTML = `<span class="syn-keyword">const</span> <span class="syn-var-name">${escapeHtml(meta.varName)}</span> <span class="syn-brace">=</span> <span class="syn-brace">{</span>
+  const codeHTML = `<span class="syn-keyword">const</span> <span class="syn-var-name">${escaparHtml(meta.varName)}</span> <span class="syn-brace">=</span> <span class="syn-brace">{</span>
 ${lines.join('\n')}
 <span class="syn-brace">}</span><span class="syn-semicolon">;</span>`
 
@@ -260,7 +278,7 @@ ${lines.join('\n')}
     <div class="presentation-card">
       <div class="presentation-card-header">
         <span class="presentation-card-number">${meta.number}</span>
-        <span class="presentation-card-type">${escapeHtml(meta.label)}</span>
+        <span class="presentation-card-type">${escaparHtml(meta.label)}</span>
       </div>
       <pre class="presentation-code-block">${codeHTML}</pre>
     </div>
@@ -270,7 +288,7 @@ ${lines.join('\n')}
   if (presentationSection) presentationSection.classList.remove('hidden')
 }
 
-export function clearPresentationLayer() {
+export function limparCamadaApresentacao() {
   if (presentationContainer) presentationContainer.innerHTML = ''
   if (presentationSection) presentationSection.classList.add('hidden')
 }
