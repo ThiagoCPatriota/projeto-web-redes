@@ -40,6 +40,39 @@
         <form method="post" class="section-form"></form>
     </section>
 
+    <section class="network-lab" id="network-lab">
+        <div class="network-lab-header">
+            <span class="network-lab-kicker">Camada 4 + roteamento</span>
+            <h2>Simulação de Pacotes na Rede</h2>
+            <p>
+                O segmento TCP recebe portas de origem e destino, depois vira um pacote IP que atravessa o grafo pela melhor rota calculada.
+            </p>
+        </div>
+
+        <div class="network-controls" aria-label="Controles da simulação de rede">
+            <label>
+                Origem
+                <select id="network-source"></select>
+            </label>
+            <label>
+                Destino
+                <select id="network-target"></select>
+            </label>
+            <label>
+                Serviço
+                <select id="network-protocol">
+                    <option value="HTTP/HTTPS">HTTP/HTTPS</option>
+                    <option value="SMTP/POP3">SMTP/POP3</option>
+                    <option value="FTP">FTP</option>
+                    <option value="WEBSOCKET">WEBSOCKET</option>
+                </select>
+            </label>
+            <button type="button" class="network-run-btn" id="network-run">Simular rota</button>
+        </div>
+
+        <div id="network-simulation-container" class="network-simulation-container"></div>
+    </section>
+
     <div id="osi-layers-container" class="osi-container"></div>
 
     <script type="module" src="./src/script/script.js"></script>

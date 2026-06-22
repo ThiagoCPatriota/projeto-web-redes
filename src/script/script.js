@@ -1,4 +1,5 @@
 import { renderOSILayers } from './osi.js';
+import { setupNetworkSimulator } from './network-simulation.js';
 
 const USER_NAME = 'Thiago Patriota';
 const user = document.querySelector('.header-user') || document.getElementById('user');
@@ -6,6 +7,8 @@ const protocol = document.querySelector('.main-result-protocol') || document.get
 
 if (user) user.innerHTML = `usuário : ${USER_NAME}`;
 if (protocol) protocol.textContent = 'HTTP';
+
+setupNetworkSimulator();
 
 const input = document.querySelector('.main-input') || document.getElementById('input');
 const button = document.querySelector('.main-button') || document.getElementById('btn');
