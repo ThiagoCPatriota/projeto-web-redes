@@ -1,0 +1,59 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    background: #171e29;
+    padding: 2rem;
+}
+
+.btn {
+    background-color: #ffffff;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    padding: 0.4rem 1rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    color: #000000;
+}
+
+.input {
+    background-color: #ffffff;
+    color: #000000;
+    border: 2px solid #ffffff;
+    padding: 0.65rem 2rem;
+    font-size: 0.6rem;
+    border-radius: 5px;
+    margin-left: 1rem;
+    flex-basis: 100%;
+}
+
+.file-input {
+    background-color: #fa8b8b;
+    color: #000000;
+    border: 2px solid #ff7d7d;
+    padding: 0.65rem 2rem;
+    font-size: 0.6rem;
+    border-radius: 5px;
+    margin-left: 1rem;
+}
+
+.pedido {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+}
+
+.result {
+    background-color: #ffffff;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    padding: 0.4rem 1rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    color: #000000;
+    margin-top: 10px;
+}

@@ -1,0 +1,44 @@
+/* --- ESTILOS DO FORMULÁRIO SMTP --- */
+
+.smtp-container {
+    margin-top: 30px;
+    width: 100%;
+    max-width: 500px;
+    background-color: #0d1117;
+    padding: 2rem;
+    border-radius: 10px;
+    border: 1px solid #30363d;
+}
+
+.smtp-title {
+    color: #ffffff;
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'Bebas Neue', sans-serif;
+    /* Usando a mesma fonte do título */
+    font-size: 2rem;
+    letter-spacing: 2px;
+}
+
+.smtp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    /* Espaçamento entre os inputs */
+}
+
+/* Força os inputs do formulário a respeitarem a coluna */
+.smtp-form .input {
+    margin-left: 0;
+    width: 100%;
+    flex-basis: auto;
+    /* Anula o flex-basis: 100% do seu .input original */
+    box-sizing: border-box;
+    /* Impede que o padding quebre a largura */
+}
+
+.smtp-form textarea.input {
+    resize: vertical;
+    min-height: 100px;
+    font-family: inherit;
+}
