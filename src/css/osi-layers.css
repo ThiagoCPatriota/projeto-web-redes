@@ -575,3 +575,81 @@
         flex-direction: column;
     }
 }
+
+/* ---- Camadas adicionadas na atividade final: Enlace e Física ---- */
+.osi-layer.layer-2 {
+    animation-delay: 1.8s;
+    background: linear-gradient(135deg, rgba(255, 176, 32, 0.16), rgba(255, 176, 32, 0.05));
+    border-left: 4px solid #ffb020;
+}
+
+.osi-layer.layer-1 {
+    animation-delay: 2.4s;
+    background: linear-gradient(135deg, rgba(255, 72, 96, 0.16), rgba(255, 72, 96, 0.05));
+    border-left: 4px solid #ff4860;
+}
+
+.layer-2 .osi-layer-badge {
+    background: linear-gradient(135deg, #ffb020, #f97316);
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.35);
+}
+
+.layer-1 .osi-layer-badge {
+    background: linear-gradient(135deg, #ff4860, #dc2626);
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.35);
+}
+
+.data-link-grid {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 0.5rem 1rem;
+    align-items: start;
+    margin-bottom: 1rem;
+}
+
+.frame-box {
+    margin-top: 0.85rem;
+    padding: 0.85rem;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.frame-box pre {
+    margin: 0.5rem 0 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: #000;
+}
+
+.binary-box pre {
+    line-height: 1.65;
+    word-break: break-all;
+}
+
+.physical-status {
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+}
+
+.physical-status-ok {
+    color: #064e3b;
+    background: rgba(16, 185, 129, 0.18);
+    border: 1px solid rgba(16, 185, 129, 0.32);
+}
+
+.physical-status-error {
+    color: #7f1d1d;
+    background: rgba(239, 68, 68, 0.18);
+    border: 1px solid rgba(239, 68, 68, 0.32);
+}
+
+@media (max-width: 768px) {
+    .data-link-grid {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+    }
+}
